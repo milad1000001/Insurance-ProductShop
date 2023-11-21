@@ -1,0 +1,19 @@
+@font-face {
+  font-family: 'Alibaba';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('../fonts//Alibaba-Regular.ttf') format('truetype');
+}
+
+html,
+body {
+  width: 100%;
+  font-family: 'Alibaba', 'Segoe UI', 'Roboto', sans-serif;
+  -moz-font-feature-settings: 'ss01';
+  -webkit-font-feature-settings: 'ss01';
+  font-feature-settings: 'ss01';
+}
+.english-text {
+  font-feature-settings: 'ss02';
+}

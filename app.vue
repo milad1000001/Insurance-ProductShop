@@ -6,7 +6,7 @@
 <script setup lang="ts"></script>
 <style lang="scss">
 .container {
-  max-width: 1500px;
+  max-width: 1200px;
   margin: 5rem auto;
   box-sizing: border-box;
   direction: rtl;

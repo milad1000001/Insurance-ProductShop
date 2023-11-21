@@ -1,11 +1,11 @@
 <template>
-  <div class="product">
-    <figure class="product__image">
+  <div class="product-item">
+    <figure class="product-item__image">
       <img :src="details.imageUrl" alt="Trulli" height="150" />
     </figure>
-    <h1 class="product__description">{{ details.name }}</h1>
+    <strong class="product-item__description english-text">{{ details.name }}</strong>
     <small>شروع قیمت از</small>
-    <span>{{ details.minPrice }}</span>
+    <div>{{ `${details.minPrice} تومان` }}</div>
   </div>
 </template>
 
@@ -18,17 +18,12 @@ defineProps<IProps>();
 </script>
 
 <style scoped lang="scss">
-.product {
+.product-item {
   display: flex;
   flex-direction: column;
-  border: 1px solid #11111122;
-  gap: 1rem;
-  border-radius: 0.5rem;
-  height: 350px;
-  padding: 1rem;
-  box-sizing: border-box;
   &__description {
-    width: 250px;
+    width: 200px;
+    font-weight: bolder;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

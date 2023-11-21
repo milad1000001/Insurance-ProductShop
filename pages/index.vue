@@ -1,7 +1,7 @@
 <template>
   <div class="home-wrapper">
-    <Filters />
-    <Products :items="products" />
+    <FilterList />
+    <ProductList :items="products" />
   </div>
 </template>
 
