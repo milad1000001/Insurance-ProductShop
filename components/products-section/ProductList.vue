@@ -7,31 +7,13 @@
 <script setup lang="ts">
 import { useInfiniteScroll } from '@vueuse/core';
 import { getProduct } from '../../api/index';
-interface ProductDetails {
-    available: Boolean;
-    azkivam: Boolean;
-    categoryId: number;
-    categoryName: string;
-    hidden: Boolean;
-    id: number;
-    imageUrl: string;
-    maxPrice: number;
-    merchantId: number;
-    merchantName: string;
-    minPrice: number;
-    name: string;
-    slug: string;
-}
-interface Product {
-    data: { value: { data: ProductDetails[]; totalItems: number } };
-}
-
+import type { ProductDetails } from '../../assets/types/index';
 const productsItem = ref<ProductDetails[]>([]);
 const page = ref(1);
 
 const getProducts = async () => {
     try {
-        const result: Product = await getProduct(page.value);
+        const result = await getProduct(page.value);
         productsItem.value = [...productsItem.value, ...result.data.value.data];
     } catch (error) {
         // eslint-disable-next-line no-console
@@ -50,6 +32,11 @@ getProducts();
 
 const el = ref<HTMLElement | null>(null);
 useInfiniteScroll(el, infiniteScrollHandler, { distance: 5, direction: 'bottom' });
+onUnmounted(() => {
+    if (el.value) {
+        el.value.removeEventListener('scroll', infiniteScrollHandler);
+    }
+});
 </script>
 
 <style lang="scss" scoped>
