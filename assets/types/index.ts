@@ -1,4 +1,4 @@
-export interface ProductDetails {
+export interface ProductItemType {
     available: Boolean;
     azkivam: Boolean;
     categoryId: number;

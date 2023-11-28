@@ -6,11 +6,11 @@ export default defineNuxtConfig({
             pathPrefix: false,
         },
     ],
-    css: ['@/assets/styles/main.css'],
+    css: ['@/assets/styles/main.css', '@fortawesome/fontawesome-svg-core/styles.css'],
     runtimeConfig: {
         public: {
             baseURL: process.env.BASE_URL || 'https://interview-api.azkiloan.com/api/v1',
         },
     },
-    modules: ['@vueuse/nuxt'],
+    modules: ['@vueuse/nuxt', 'nuxt-icons'],
 });

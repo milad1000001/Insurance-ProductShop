@@ -7,14 +7,16 @@
 <script setup lang="ts">
 import { useInfiniteScroll } from '@vueuse/core';
 import { getProduct } from '../../api/index';
-import type { ProductDetails } from '../../assets/types/index';
-const productsItem = ref<ProductDetails[]>([]);
-const page = ref(1);
+import type { ProductItemType } from '../../assets/types/index';
+const productsItem = ref<ProductItemType[]>([]);
+const pageNumber = ref(1);
 
-const getProducts = async () => {
+const getProducts = async (page: number = pageNumber.value, productId: number | null = null) => {
     try {
-        const result = await getProduct(page.value);
-        productsItem.value = [...productsItem.value, ...result.data.value.data];
+        const result = await getProduct(page, productId);
+        if (result.data.value) {
+            productsItem.value = [...productsItem.value, ...result.data.value.data];
+        }
     } catch (error) {
         // eslint-disable-next-line no-console
         console.error('Error fetching products:', error);
@@ -23,10 +25,16 @@ const getProducts = async () => {
 
 const infiniteScrollHandler = () => {
     if (productsItem.value.length) {
-        page.value++;
+        pageNumber.value++;
         getProducts();
     }
 };
+
+watchEffect(() => {
+    const selectedProductId: Ref<number> = useState('productId');
+    pageNumber.value = 1;
+    getProducts(pageNumber.value, selectedProductId.value);
+});
 
 getProducts();
 
@@ -42,10 +50,9 @@ onUnmounted(() => {
 <style lang="scss" scoped>
 .product-list {
     display: grid;
+    position: relative;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 0.5rem;
-    border: 1px solid black;
-    border-radius: 0.5rem;
     width: 100%;
     height: 900px;
     overflow-y: scroll;
