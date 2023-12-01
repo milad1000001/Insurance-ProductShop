@@ -6,7 +6,7 @@ export const getProduct = async (page: number, productId: number | null = null) 
     return await useAsyncData<ProductItemType>('products', () =>
         $fetch(`${config.public.baseURL}/products${productId ? '/' + productId : ''}`, {
             method: 'POST',
-            params: { size: 10, page },
+            params: { size: 20, page },
         }),
     );
 };

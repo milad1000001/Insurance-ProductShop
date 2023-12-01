@@ -9,23 +9,17 @@
             :key="key"
             :class="isOpen ? 'base-dropdown__open' : 'base-dropdown__close'"
         >
-            <div v-if="isOpen" class="base-dropdown__item" @click="sendProductId(child.id)">
-                {{ child.name }}
+            <div v-if="isOpen" class="base-dropdown__item">
+                <nuxt-link class="base-dropdown__link" :to="`/product/${child.id}`">{{ child.name }}</nuxt-link>
             </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-const router = useRouter();
-
 interface BaseDropdownProps {
     items: any;
 }
-
-const sendProductId = (id: number) => {
-    router.push({ path: `/${id}` });
-};
 
 defineProps<BaseDropdownProps>();
 const isOpen = ref(true);
@@ -41,10 +35,15 @@ const isOpen = ref(true);
         font-size: 16px;
     }
     &__item {
-        padding: 0.2rem 1rem;
         padding: 0.5rem 1rem;
-        color: #888888;
         font-size: 14px;
+    }
+    &__link {
+        color: #999;
+        text-decoration: none;
+        &:hover {
+            color: #333;
+        }
     }
     &__open {
         opacity: 1;

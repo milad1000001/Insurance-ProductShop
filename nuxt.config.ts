@@ -13,4 +13,23 @@ export default defineNuxtConfig({
         },
     },
     modules: ['@vueuse/nuxt', 'nuxt-icons'],
+    router: {
+        extendRoutes(routes, resolve) {
+            routes.push(
+                {
+                    name: 'home',
+                    path: '*',
+                    file: () => resolve(__dirname, 'pages/product/index.vue'),
+                },
+                {
+                    name: 'product',
+                    path: 'product/:id',
+                    component: () => resolve(__dirname, 'pages/product/index.vue'),
+                },
+            );
+        },
+    },
+    routeRules: {
+        '/': { redirect: '/product' },
+    },
 });

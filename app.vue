@@ -1,14 +1,12 @@
 <template>
-    <div class="container">
+    <NuxtLayout :name="'default'">
         <NuxtPage />
-    </div>
+    </NuxtLayout>
 </template>
-<script setup lang="ts"></script>
-<style lang="scss">
-.container {
-    box-sizing: border-box;
-    margin: 5rem auto;
-    max-width: 1200px;
-    direction: rtl;
+<style lang="scss" scoped>
+.home-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
 }
 </style>

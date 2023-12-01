@@ -30,12 +30,6 @@ const infiniteScrollHandler = () => {
     }
 };
 
-watchEffect(() => {
-    const selectedProductId: Ref<number> = useState('productId');
-    pageNumber.value = 1;
-    getProducts(pageNumber.value, selectedProductId.value);
-});
-
 getProducts();
 
 const el = ref<HTMLElement | null>(null);
@@ -54,7 +48,7 @@ onUnmounted(() => {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 0.5rem;
     width: 100%;
-    height: 900px;
+    height: 100vh;
     overflow-y: scroll;
     &__item {
         gap: 1rem;
